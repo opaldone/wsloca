@@ -1,0 +1,9 @@
+bin
+node_modules
+pkg
+src/github.com
+src/golang.org
+src/google.golang.org
+src/wsloca/go.mod
+src/wsloca/go.sum
+l.log

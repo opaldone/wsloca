@@ -1,0 +1,30 @@
+{
+  "appname": "opachat",
+  "address": "0.0.0.0",
+  "port": 8080,
+  "static": "static",
+  "acme": false,
+  "acmehost": [
+    "opaldone.click",
+    "206.189.101.23",
+    "www.opaldone.click"
+  ],
+  "dirCache": "./certs",
+  "crt": "/mnt/terik/a_my/admigo_project/admigo/bin/certs_local/server.crt",
+  "key": "/mnt/terik/a_my/admigo_project/admigo/bin/certs_local/server.key",
+  "iceList": [
+    {
+      "urls": "turn:192.168.0.104:3478",
+      "username": "shpav",
+      "credential": "qw"
+    }
+  ],
+  "recorder": {
+    "urlVirt": "https://admigo.so/virt",
+    "soundLib": "pulse",
+    "iHw": "0",
+    "scrRes": "2560x1080",
+    "logLevel": "error",
+    "timeout": 10
+  }
+}
