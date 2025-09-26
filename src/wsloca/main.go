@@ -6,8 +6,8 @@ import (
 	"net/http"
 	"time"
 
-	"opachat/controllers"
-	"opachat/tools"
+	"wsloca/controllers"
+	"wsloca/tools"
 
 	"golang.org/x/crypto/acme/autocert"
 )
@@ -30,12 +30,11 @@ func main() {
 }
 
 func startSelf(e *tools.Configuration) {
-	fmt.Printf("\n[%s] %s\ntime\t\t%s\ncrt\t\t%s\nkey\t\t%s\naddress\t\t%s:%d\nturn\t\t%s\n",
+	fmt.Printf("\n[%s] %s\ntime\t\t%s\ncrt\t\t%s\nkey\t\t%s\naddress\t\t%s:%d\n",
 		"self", e.Appname,
 		time.Now().Format("2006-01-02 15:04:05"),
 		e.Crt, e.Key,
 		e.Address, e.Port,
-		e.IceList[0]["urls"],
 	)
 
 	mux := controllers.GetRouters()
@@ -53,11 +52,10 @@ func startSelf(e *tools.Configuration) {
 }
 
 func startAcme(e *tools.Configuration) {
-	fmt.Printf("\n[%s] %s\ntime\t\t%s\nacmehost\t%s\ndirCache\t%s\naddress\t\t%s:%d\nturn\t\t%s\n",
+	fmt.Printf("\n[%s] %s\ntime\t\t%s\nacmehost\t%s\ndirCache\t%s\naddress\t\t%s:%d\n",
 		"acme", e.Appname,
 		time.Now().Format("2006-01-02 15:04:05"),
 		e.Acmehost, e.DirCache, e.Address, e.Port,
-		e.IceList[0]["urls"],
 	)
 
 	certManager := &autocert.Manager{

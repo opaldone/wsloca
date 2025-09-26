@@ -1,0 +1,8 @@
+#!/bin/bash
+
+TTL="wsloca"
+
+W_FILES=(
+# json
+    "$src/config.json;$bin/config.json"
+)
