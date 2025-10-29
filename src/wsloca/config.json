@@ -9,6 +9,6 @@
     "www.opaldone.click"
   ],
   "dirCache": "./certs",
-  "crt": "/mnt/terik/a_my/admigo_project/admigo/bin/certs_local/server.crt",
-  "key": "/mnt/terik/a_my/admigo_project/admigo/bin/certs_local/server.key"
+  "crt": "/mnt/terik/a_my/admigo_project/ser/admigo/bin/certs_local/server.crt",
+  "key": "/mnt/terik/a_my/admigo_project/ser/admigo/bin/certs_local/server.key"
 }

@@ -73,6 +73,8 @@ func (c *Client) processMessage(msg *Message) {
 		c.sendMeListClients()
 	case SENDERHI:
 		c.hub.hiReceivers(msg)
+	case GOCHAT:
+		c.hub.reqChat(msg)
 	}
 }
 

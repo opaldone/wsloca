@@ -10,6 +10,7 @@ const (
 	CLIST    = "clist"
 	SENDERHI = "sender_hi"
 	SENDERST = "sender_stop"
+	GOCHAT   = "go_chat"
 )
 
 type Message struct {
@@ -21,6 +22,7 @@ type SenderType struct {
 	Cid      string `json:"cid"`
 	Nik      string `json:"nik"`
 	IsSender bool   `json:"issender"`
+	Roomid   string `json:"roomid"`
 }
 
 func decMessage(txt []byte) (msg *Message) {
