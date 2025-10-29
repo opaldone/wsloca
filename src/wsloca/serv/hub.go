@@ -150,3 +150,18 @@ func (h *Hub) ansLoca(msg *Message) {
 		cl.send <- bts
 	}
 }
+
+func (h *Hub) reqChat(msg *Message) {
+	h.lockHub.RLock()
+	defer h.lockHub.RUnlock()
+
+	si := decSender(msg.Content)
+	clin, ex := h.clients[si.Cid]
+
+	if !ex {
+		return
+	}
+
+	bts, _ := json.Marshal(msg)
+	clin.send <- bts
+}
