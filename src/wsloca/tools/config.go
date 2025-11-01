@@ -2,6 +2,7 @@ package tools
 
 import (
 	"encoding/json"
+	"fmt"
 	"os"
 )
 
@@ -10,6 +11,7 @@ type Configuration struct {
 	Appname  string   `json:"appname"`
 	Address  string   `json:"address"`
 	Port     int      `json:"port"`
+	Static   string   `json:"static"`
 	Acme     bool     `json:"acme"`
 	Acmehost []string `json:"acmehost"`
 	DirCache string   `json:"dirCache"`
@@ -17,7 +19,10 @@ type Configuration struct {
 	Key      string   `json:"key,omitempty"`
 }
 
-var conf *Configuration
+var (
+	conf    *Configuration
+	csrfkey string
+)
 
 func loadConfig() {
 	file, err := os.Open("config.json")
@@ -40,4 +45,14 @@ func Env(reload bool) *Configuration {
 	}
 
 	return conf
+}
+
+func setCsrf() {
+	csrfkey = CreateUUID()
+
+	fmt.Println(csrfkey)
+}
+
+func GetKeyCSRF() string {
+	return csrfkey
 }

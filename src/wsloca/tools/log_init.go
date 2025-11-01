@@ -8,6 +8,7 @@ import (
 
 func init() {
 	loadConfig()
+	setCsrf()
 }
 
 // Danger puts a error message
