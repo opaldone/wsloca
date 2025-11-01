@@ -2,10 +2,12 @@
 package controllers
 
 import (
+	"fmt"
 	"net/http"
 	"strconv"
 
 	"wsloca/serv"
+	"wsloca/tools"
 
 	"github.com/julienschmidt/httprouter"
 )
@@ -26,4 +28,20 @@ func Ws(w http.ResponseWriter, r *http.Request, ps httprouter.Params) {
 	issender := s > 0
 
 	serv.ServeWs(cid, issender, hub, w, r)
+}
+
+func Di(w http.ResponseWriter, r *http.Request, ps httprouter.Params) {
+	uq := ps.ByName("uq")
+
+	if uq != tools.GetKeyCSRF() {
+		fmt.Printf("\ncsrf\t\t%s\n",
+			tools.GetKeyCSRF(),
+		)
+
+		return
+	}
+
+	deb := hub.GetShowClients()
+
+	GenerateHTMLEmp(w, r, deb, "stru/dix")
 }

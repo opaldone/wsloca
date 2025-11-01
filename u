@@ -29,6 +29,38 @@ function check_dirs_files() {
     done
 }
 
+function copy_folders() {
+    local -n ari=$1
+
+    for page in "${ari[@]}"
+    do
+        IFS=";" read -r -a arr <<< "${page}"
+
+        declare fsr="${arr[0]}"
+        declare fde="${arr[1]}"
+        declare dirna="$(dirname "${fde}")"
+        declare c_files=0
+
+        if [ -e $fde ]; then
+            declare c_files=$(ls -1q $fde | wc -l)
+        fi
+
+        if [[ $c_files -gt 0 ]]; then
+            continue
+        fi
+
+        declare out_mk=$(mkdir -pv "$fde")
+        if [[ ! -z $out_mk ]]; then
+            echo "[Copy folders mk] $fde"
+        fi
+
+        declare out_cp=$(cp -rv "$fsr" "$dirna")
+        if [[ ! -z $out_cp ]]; then
+            echo "[Copy folders cp] $fsr"
+        fi
+    done
+}
+
 function copira() {
     local -n acp=$1
 
@@ -63,6 +95,7 @@ echo -en "\033]0;$TTL\a"
 
 clear
 
+copy_folders C_FOLDERS
 check_dirs_files W_FILES
 
 while true;

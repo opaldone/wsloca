@@ -14,6 +14,12 @@ type Hub struct {
 	lockHub    sync.RWMutex
 }
 
+type ClientDebType struct {
+	Cid      string
+	Nik      string
+	Issender bool
+}
+
 // NewHub create new hub
 func NewHub() *Hub {
 	return &Hub{
@@ -164,4 +170,21 @@ func (h *Hub) reqChat(msg *Message) {
 
 	bts, _ := json.Marshal(msg)
 	clin.send <- bts
+}
+
+func (h *Hub) GetShowClients() (list []ClientDebType) {
+	h.lockHub.RLock()
+	defer h.lockHub.RUnlock()
+
+	for _, cl := range h.clients {
+		item := ClientDebType{
+			Cid:      cl.cid,
+			Nik:      cl.nik,
+			Issender: cl.issender,
+		}
+
+		list = append(list, item)
+	}
+
+	return
 }
