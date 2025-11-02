@@ -1,5 +1,4 @@
 #deb-cont {
-  font-family: "Roboto Mono", monospace;
   padding: 20px 0 20px 0;
   width: 50%;
   margin: auto;
@@ -39,7 +38,7 @@
 
 .deb-tbl td.td-cen span {
   display: inline-block;
-  padding: 0 6px 4px 6px;
+  padding: 1px 6px 4px 6px;
   font-size: 16px;
   line-height: 16px;
   color: #fff;

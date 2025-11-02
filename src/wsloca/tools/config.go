@@ -2,7 +2,6 @@ package tools
 
 import (
 	"encoding/json"
-	"fmt"
 	"os"
 )
 
@@ -49,8 +48,6 @@ func Env(reload bool) *Configuration {
 
 func setCsrf() {
 	csrfkey = CreateUUID()
-
-	fmt.Println(csrfkey)
 }
 
 func GetKeyCSRF() string {

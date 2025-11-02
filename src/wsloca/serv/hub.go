@@ -3,6 +3,7 @@ package serv
 
 import (
 	"encoding/json"
+	"sort"
 	"sync"
 )
 
@@ -185,6 +186,10 @@ func (h *Hub) GetShowClients() (list []ClientDebType) {
 
 		list = append(list, item)
 	}
+
+	sort.Slice(list, func(i, j int) bool {
+		return list[i].Cid < list[j].Cid
+	})
 
 	return
 }
