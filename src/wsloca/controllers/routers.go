@@ -20,7 +20,7 @@ var list routes
 
 func init() {
 	list = routes{
-		"ws_connect": route{"GET", "/ws/:cid/:sender", Ws},
+		"ws_connect": route{"GET", "/ws/:sender", Ws},
 		"di":         route{"GET", "/di/:uq", Di},
 	}
 }

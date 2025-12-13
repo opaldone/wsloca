@@ -14,25 +14,16 @@ const (
 )
 
 type Message struct {
-	Tp      string `json:"tp"`
-	Content string `json:"content"`
-}
-
-type SenderType struct {
+	Tp       string `json:"tp"`
 	Cid      string `json:"cid"`
 	Nik      string `json:"nik"`
 	IsSender bool   `json:"issender"`
 	Roomid   string `json:"roomid"`
+	Content  string `json:"content"`
 }
 
 func decMessage(txt []byte) (msg *Message) {
 	msg = new(Message)
 	json.Unmarshal(txt, msg)
-	return
-}
-
-func decSender(txt string) (st *SenderType) {
-	st = new(SenderType)
-	json.Unmarshal([]byte(txt), st)
 	return
 }
