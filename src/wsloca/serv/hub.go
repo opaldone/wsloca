@@ -65,10 +65,10 @@ func (h *Hub) listSenders() (res string) {
 	h.lockHub.RLock()
 	defer h.lockHub.RUnlock()
 
-	var lis []SenderType
+	var lis []Message
 
 	for _, cl := range h.clients {
-		lis = append(lis, SenderType{
+		lis = append(lis, Message{
 			Cid:      cl.cid,
 			Nik:      cl.nik,
 			IsSender: cl.issender,
@@ -85,13 +85,6 @@ func (h *Hub) hiReceivers(msg *Message) {
 	h.lockHub.RLock()
 	defer h.lockHub.RUnlock()
 
-	si := decSender(msg.Content)
-	clin, ex := h.clients[si.Cid]
-
-	if ex {
-		clin.setMe(si)
-	}
-
 	bts, _ := json.Marshal(msg)
 
 	for _, cl := range h.clients {
@@ -107,16 +100,10 @@ func (h *Hub) senderStopped(cl *Client) {
 	h.lockHub.RLock()
 	defer h.lockHub.RUnlock()
 
-	st := SenderType{
-		Cid: cl.cid,
-	}
-
-	bont, _ := json.Marshal(st)
-	str := string(bont)
-
 	msg := new(Message)
 	msg.Tp = SENDERST
-	msg.Content = str
+	msg.Cid = cl.cid
+
 	bts, _ := json.Marshal(msg)
 
 	for _, cl := range h.clients {
@@ -132,8 +119,7 @@ func (h *Hub) reqLoca(msg *Message) {
 	h.lockHub.RLock()
 	defer h.lockHub.RUnlock()
 
-	si := decSender(msg.Content)
-	clin, ex := h.clients[si.Cid]
+	clin, ex := h.clients[msg.Cid]
 
 	if !ex {
 		return
@@ -162,8 +148,7 @@ func (h *Hub) reqChat(msg *Message) {
 	h.lockHub.RLock()
 	defer h.lockHub.RUnlock()
 
-	si := decSender(msg.Content)
-	clin, ex := h.clients[si.Cid]
+	clin, ex := h.clients[msg.Cid]
 
 	if !ex {
 		return

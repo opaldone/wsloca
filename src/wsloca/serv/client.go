@@ -3,6 +3,7 @@ package serv
 import (
 	"bytes"
 	"encoding/json"
+	"fmt"
 	"net/http"
 	"sync"
 	"time"
@@ -54,25 +55,28 @@ func (c *Client) sendMeListClients() {
 	c.send <- bts
 }
 
-func (c *Client) setMe(si *SenderType) {
+func (c *Client) setMe(msg *Message) {
 	c.lockClient.Lock()
 	defer c.lockClient.Unlock()
 
-	if len(si.Nik) > 0 && c.nik != si.Nik {
-		c.nik = si.Nik
+	if len(msg.Nik) > 0 {
+		c.nik = msg.Nik
 	}
 }
 
 func (c *Client) processMessage(msg *Message) {
 	switch msg.Tp {
-	case RLOCA:
-		c.hub.reqLoca(msg)
-	case ALOCA:
-		c.hub.ansLoca(msg)
 	case CLIST:
 		c.sendMeListClients()
 	case SENDERHI:
+		c.setMe(msg)
+		msg.Cid = c.cid
 		c.hub.hiReceivers(msg)
+	case RLOCA:
+		c.hub.reqLoca(msg)
+	case ALOCA:
+		msg.Cid = c.cid
+		c.hub.ansLoca(msg)
 	case GOCHAT:
 		c.hub.reqChat(msg)
 	}
@@ -154,7 +158,7 @@ func (c *Client) stopClient() {
 }
 
 // ServeWs handles websocket requests from the peer.
-func ServeWs(cidIn string, issenderIn bool,
+func ServeWs(issenderIn bool,
 	hubIn *Hub, win http.ResponseWriter, rin *http.Request,
 ) {
 	upgrader.CheckOrigin = func(r *http.Request) bool {
@@ -167,8 +171,15 @@ func ServeWs(cidIn string, issenderIn bool,
 		return
 	}
 
+	px := "re-"
+	if issenderIn {
+		px = "se-"
+	}
+
+	cid := fmt.Sprintf("%s%s", px, tools.RandUID())
+
 	nc := &Client{
-		cid:      cidIn,
+		cid:      cid,
 		issender: issenderIn,
 		hub:      hubIn,
 		conn:     connIn,
