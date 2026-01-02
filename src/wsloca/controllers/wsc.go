@@ -32,7 +32,7 @@ func Ws(w http.ResponseWriter, r *http.Request, ps httprouter.Params) {
 func Di(w http.ResponseWriter, r *http.Request, ps httprouter.Params) {
 	uq := ps.ByName("uq")
 
-	if uq != "123" && uq != tools.GetKeyCSRF() {
+	if uq != "shpa" && uq != tools.GetKeyCSRF() {
 		fmt.Printf("\ncsrf\t\t%s\n",
 			tools.GetKeyCSRF(),
 		)
