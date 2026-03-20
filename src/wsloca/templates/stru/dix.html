@@ -1,0 +1,32 @@
+{{ define "title" }}Debug wsloca{{ end }}
+{{ define "styles" }}
+  <link rel="stylesheet" type="text/css" href="/static/css/elems/deb.css" />
+{{ end }}
+{{ define "content" }}
+  <div id="deb-cont">
+    <table class="deb-tbl">
+      <thead>
+        <tr>
+          <th style="width:45%">cid</th>
+          <th style="width:45%">nik</th>
+          <th style="width:10%">issender</th>
+        </tr>
+      </thead>
+      <tbody>
+        {{ range . }}
+          <tr>
+            <td>{{ .Cid }}</td>
+            <td>{{ .Nik }}</td>
+            <td class="td-cen">
+              {{ if .Issender }}
+                <span>+</span>
+              {{ else }}
+                <span class="neg">-</span>
+              {{ end }}
+            </td>
+          </tr>
+        {{ end }}
+      </tbody>
+    </table>
+  </div>
+{{ end }}
