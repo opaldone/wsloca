@@ -97,6 +97,10 @@ echo -en "\033]0;$TTL\a"
 
 clear
 
+if [ ! -z ${E_FOLDERS+x} ]; then
+    check_dirs_files E_FOLDERS
+fi
+
 copy_folders C_FOLDERS
 check_dirs_files W_FILES
 
