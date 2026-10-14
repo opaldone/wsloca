@@ -158,6 +158,20 @@ func (h *Hub) reqChat(msg *Message) {
 	clin.send <- bts
 }
 
+func (h *Hub) reqAlarm(msg *Message) {
+	h.lockHub.RLock()
+	defer h.lockHub.RUnlock()
+
+	clin, ex := h.clients[msg.Cid]
+
+	if !ex {
+		return
+	}
+
+	bts, _ := json.Marshal(msg)
+	clin.send <- bts
+}
+
 func (h *Hub) GetShowClients() (list []ClientDebType) {
 	h.lockHub.RLock()
 	defer h.lockHub.RUnlock()
