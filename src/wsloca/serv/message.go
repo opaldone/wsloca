@@ -11,6 +11,7 @@ const (
 	SENDERHI = "sender_hi"
 	SENDERST = "sender_stop"
 	GOCHAT   = "go_chat"
+	AMED     = "amed"
 )
 
 type Message struct {

@@ -79,6 +79,8 @@ func (c *Client) processMessage(msg *Message) {
 		c.hub.ansLoca(msg)
 	case GOCHAT:
 		c.hub.reqChat(msg)
+	case AMED:
+		c.hub.reqAlarm(msg)
 	}
 }
 

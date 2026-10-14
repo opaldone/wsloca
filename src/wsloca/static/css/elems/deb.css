@@ -12,8 +12,8 @@
 .deb-tbl td {
   font-size: 14px;
   line-height: 16px;
-  padding: 5px 15px 9px 15px;
-  border-color: #d7d7d7;
+  padding: 5px 10px 5px 10px;
+  border-color: #373737;
   border-style: solid;
   border-width: 1px;
   vertical-align: middle;
@@ -22,31 +22,40 @@
 .deb-tbl th {
   position: relative;
   font-weight: normal;
-  color: #000;
-  background-color: #e7e7e7;
+  color: #b7b7b7;
+  background-color: #272727;
   text-align: left;
 }
 
 .deb-tbl td {
   position: relative;
-  color: #575757;
+  color: #e7e7e7;
+  background-color: #171717;
 }
 
 .deb-tbl td.td-cen {
   text-align: center;
+  line-height: 0;
 }
 
 .deb-tbl td.td-cen span {
   display: inline-block;
-  padding: 1px 6px 4px 6px;
-  font-size: 16px;
-  line-height: 16px;
-  color: #fff;
-  background-color: #2b5de5;
-  border-radius: 10px;
+  background-color: #fff;
+  border: 5px solid #2b5de5;
+  width: 15px;
+  height: 15px;
+  line-height: 0;
+  border-radius: 50%;
 }
 
 .deb-tbl td.td-cen span.neg {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: auto;
   background: none;
-  color: #000;
+  border: none;
+  font-size: 16px;
+  line-height: 16px;
+  color: #fff;
 }

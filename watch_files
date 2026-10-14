@@ -4,6 +4,7 @@ TTL="wsloca"
 
 C_FOLDERS=(
     "$src/static/images;$bin/static/images"
+    "$src/static/external;$bin/static/external"
 )
 
 W_FILES=(
@@ -14,6 +15,7 @@ W_FILES=(
     "$src/templates/stru/dix.html;$bin/templates/stru/dix.html"
 # css
     "$src/static/css/inc/reset.css;$bin/static/css/inc/reset.css"
+    "$src/static/css/inc/inc_fonts.css;$bin/static/css/inc/inc_fonts.css"
     "$src/static/css/inc/style.css;$bin/static/css/inc/style.css"
     "$src/static/css/elems/deb.css;$bin/static/css/elems/deb.css"
 )
